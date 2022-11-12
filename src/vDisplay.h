@@ -1,0 +1,15 @@
+
+
+
+
+
+void vInit_display();
+void SIGNAL_STRENGHT_5();
+void SIGNAL_STRENGHT_4();
+void SIGNAL_STRENGHT_3();
+void SIGNAL_STRENGHT_2();
+void SIGNAL_STRENGHT_1();
+void NO_SIGNAL();
+
+void SERVER_CONNECTED();
+void SERVER_DISCONNECTED();

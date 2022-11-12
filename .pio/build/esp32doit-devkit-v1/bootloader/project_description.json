@@ -1,0 +1,21 @@
+{
+    "project_name":       "bootloader",
+    "project_path":       "C:/Users/Mark/.platformio/packages/framework-espidf/components/bootloader/subproject",
+    "build_dir":          "C:/Users/Mark/Desktop/Pos_Graduacao_inatel/IT012/Projeto/PRJ_IOT012/.pio/build/esp32doit-devkit-v1/bootloader",
+    "config_file":        "C:/Users/Mark/Desktop/Pos_Graduacao_inatel/IT012/Projeto/PRJ_IOT012/sdkconfig.esp32doit-devkit-v1",
+    "config_defaults":    "",
+    "app_elf":            "bootloader.elf",
+    "app_bin":            "bootloader.bin",
+    "git_revision":       "4.4.2",
+    "target":             "esp32",
+    "rev":                "0",
+    "phy_data_partition": "",
+    "monitor_baud" :      "115200",
+    "monitor_toolprefix": "xtensa-esp32-elf-",
+    "config_environment" : {
+        "COMPONENT_KCONFIGS" : "C:/Users/Mark/.platformio/packages/framework-espidf/components/efuse/Kconfig;C:/Users/Mark/.platformio/packages/framework-espidf/components/esp32/Kconfig;C:/Users/Mark/.platformio/packages/framework-espidf/components/esp_common/Kconfig;C:/Users/Mark/.platformio/packages/framework-espidf/components/esp_hw_support/Kconfig;C:/Users/Mark/.platformio/packages/framework-espidf/components/esp_system/Kconfig;C:/Users/Mark/.platformio/packages/framework-espidf/components/freertos/Kconfig;C:/Users/Mark/.platformio/packages/framework-espidf/components/hal/Kconfig;C:/Users/Mark/.platformio/packages/framework-espidf/components/log/Kconfig;C:/Users/Mark/.platformio/packages/framework-espidf/components/newlib/Kconfig;C:/Users/Mark/.platformio/packages/framework-espidf/components/spi_flash/Kconfig",
+        "COMPONENT_KCONFIGS_PROJBUILD" : "C:/Users/Mark/.platformio/packages/framework-espidf/components/bootloader/Kconfig.projbuild;C:/Users/Mark/.platformio/packages/framework-espidf/components/esp_rom/Kconfig.projbuild;C:/Users/Mark/.platformio/packages/framework-espidf/components/esptool_py/Kconfig.projbuild;C:/Users/Mark/.platformio/packages/framework-espidf/components/partition_table/Kconfig.projbuild"
+    },
+    "build_components" : [ "bootloader", "bootloader_support", "efuse", "esp32", "esp_common", "esp_hw_support", "esp_rom", "esp_system", "esptool_py", "freertos", "hal", "log", "main", "micro-ecc", "newlib", "partition_table", "soc", "spi_flash", "xtensa", "" ],
+    "build_component_paths" : [ "C:/Users/Mark/.platformio/packages/framework-espidf/components/bootloader", "C:/Users/Mark/.platformio/packages/framework-espidf/components/bootloader_support", "C:/Users/Mark/.platformio/packages/framework-espidf/components/efuse", "C:/Users/Mark/.platformio/packages/framework-espidf/components/esp32", "C:/Users/Mark/.platformio/packages/framework-espidf/components/esp_common", "C:/Users/Mark/.platformio/packages/framework-espidf/components/esp_hw_support", "C:/Users/Mark/.platformio/packages/framework-espidf/components/esp_rom", "C:/Users/Mark/.platformio/packages/framework-espidf/components/esp_system", "C:/Users/Mark/.platformio/packages/framework-espidf/components/esptool_py", "C:/Users/Mark/.platformio/packages/framework-espidf/components/freertos", "C:/Users/Mark/.platformio/packages/framework-espidf/components/hal", "C:/Users/Mark/.platformio/packages/framework-espidf/components/log", "C:/Users/Mark/.platformio/packages/framework-espidf/components/bootloader/subproject/main", "C:/Users/Mark/.platformio/packages/framework-espidf/components/bootloader/subproject/components/micro-ecc", "C:/Users/Mark/.platformio/packages/framework-espidf/components/newlib", "C:/Users/Mark/.platformio/packages/framework-espidf/components/partition_table", "C:/Users/Mark/.platformio/packages/framework-espidf/components/soc", "C:/Users/Mark/.platformio/packages/framework-espidf/components/spi_flash", "C:/Users/Mark/.platformio/packages/framework-espidf/components/xtensa", "" ]
+}

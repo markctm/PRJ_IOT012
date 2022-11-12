@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"name": "PRJ_IOT012",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"queue.h": "c",
+			"esp_log.h": "c"
+		}
+	}
+}
