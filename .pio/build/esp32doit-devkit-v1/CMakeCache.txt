@@ -236,7 +236,7 @@ ENABLE_TESTING:BOOL=
 ENABLE_ZLIB_SUPPORT:BOOL=OFF
 
 //No help, variable specified on the command line.
-EXTRA_COMPONENT_DIRS:PATH=c:/Users/Mark/Desktop/Pos_Graduacao_inatel/IT012/Projeto/PRJ_IOT012/src
+EXTRA_COMPONENT_DIRS:PATH=C:/Users/Mark/Desktop/Pos_Graduacao_inatel/IT012/Projeto/PRJ_IOT012/src
 
 //Git command line client
 GIT_EXECUTABLE:FILEPATH=C:/Program Files/Git/cmd/git.exe
@@ -272,7 +272,7 @@ PYTHON:UNINITIALIZED=C:\Users\Mark\.platformio\penv\Scripts\python.exe
 PYTHON_DEPS_CHECKED:UNINITIALIZED=1
 
 //No help, variable specified on the command line.
-SDKCONFIG:UNINITIALIZED=c:\Users\Mark\Desktop\Pos_Graduacao_inatel\IT012\Projeto\PRJ_IOT012\sdkconfig.esp32doit-devkit-v1
+SDKCONFIG:UNINITIALIZED=C:\Users\Mark\Desktop\Pos_Graduacao_inatel\IT012\Projeto\PRJ_IOT012\sdkconfig.esp32doit-devkit-v1
 
 //Allow unsafe builds. These builds ARE NOT SECURE.
 UNSAFE_BUILD:BOOL=OFF

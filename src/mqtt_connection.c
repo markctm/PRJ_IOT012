@@ -31,9 +31,6 @@
 #include "mqtt_connection.h"
 #include "vDisplay.h"
 
-
-
-
 #define CONFIG_CLIENT_ID     "gatoee"
 #define MQTT_SERVER                                 "mqtt://m16.cloudmqtt.com:10304"
 #define MQTT_USER                                   "pbgjzbad"
@@ -41,7 +38,6 @@
 #define MQTT_PORT                                   10304
 #define MQTT_KEEPALIVE_SECONDS                      120
 #define MQTT_CLEAN_SESSION                          0  
-
 
 
 static const char *TAG = "MQTTS_EXAMPLE";

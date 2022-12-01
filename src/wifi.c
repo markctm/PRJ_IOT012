@@ -28,11 +28,8 @@
    the config you want - ie #define EXAMPLE_WIFI_SSID "mywifissid"
 */
 
-#define EXAMPLE_ESP_WIFI_SSID      "FRITZ!Box 7530 YS"
-#define EXAMPLE_ESP_WIFI_PASS      "08879237661643994372"
-//#define EXAMPLE_ESP_WIFI_SSID      "TooPrede"
-//#define EXAMPLE_ESP_WIFI_PASS      "12345678"
-
+#define EXAMPLE_ESP_WIFI_SSID      "eir24437355"
+#define EXAMPLE_ESP_WIFI_PASS      "hJKPjesRxC"
 
 
 #define EXAMPLE_ESP_MAXIMUM_RETRY  50

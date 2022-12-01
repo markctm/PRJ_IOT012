@@ -14,9 +14,9 @@
 #include <freertos/semphr.h>
 
 // SDA - GPIO21
-#define PIN_SDA 21
+#define PIN_SDA 33
 // SCL - GPIO22
-#define PIN_SCL 22
+#define PIN_SCL 32
 static const char* TAG = "ssd1306";
 
 
@@ -34,6 +34,8 @@ u8g2_t u8g2_status_bar;
 SemaphoreHandle_t mutexHdlr;
 
 uint32_t Status_bar_flag = 0b00000000000000000000000000000000;    //  0b0000000|0000|00000; 
+
+
 
 
 static void task_test_SSD1306i2c(u8g2_t* u8g2_display);
@@ -315,7 +317,7 @@ char text[20];
           u8g2_SetDrawColor(u8g2_display,1);
 
           u8g2_SetFont(u8g2_display, u8g2_font_micro_tr );
-
+/*
           u8g2_DrawStr(u8g2_display, 3, 14, "Humidity:");
           sprintf(text, "%0.1f", humidity);
           u8g2_DrawStr(u8g2_display, 41,14, text);
@@ -324,6 +326,53 @@ char text[20];
           sprintf(text, "%0.1f", temperature);
           u8g2_DrawStr(u8g2_display, 52,21, text);
           u8g2_SendBuffer(u8g2_display);
+*/
+
+
+          u8g2_DrawStr(u8g2_display, 3, 14, "acel(x,y,z): ");
+          
+          int pos=0;
+          pos+=sprintf(&text[pos], "%d  ", accel_x);
+          pos+=sprintf(&text[pos], "%d  ", accel_y);
+          pos+=sprintf(&text[pos], "%d  ", accel_z);
+          u8g2_DrawStr(u8g2_display,54,14, text);
+          
+          
+          u8g2_DrawStr(u8g2_display, 3, 21, "gyro(x,y,z): ");
+          
+          pos=0;
+          pos+=sprintf(&text[pos], "%d ", gyro_x);
+          pos+=sprintf(&text[pos], "%d ", gyro_y);
+          pos+=sprintf(&text[pos], "%d ", gyro_z);
+
+          u8g2_DrawStr(u8g2_display, 55,21, text);
+
+
+          u8g2_DrawStr(u8g2_display, 3, 28, "Lumin: ");
+          pos=0;
+          pos+=sprintf(&text[pos], "%0.1f ", illuminance);
+          u8g2_DrawStr(u8g2_display, 35,28, text);
+
+          u8g2_DrawStr(u8g2_display, 70, 28, "Temp: ");
+          pos=0;
+          pos+=sprintf(&text[pos], "%0.1f ", temp_mpu);
+          u8g2_DrawStr(u8g2_display, 95,28, text);
+
+
+/*
+          u8g2_DrawStr(u8g2_display, 3, 21, "accel_y: ");
+          sprintf(text, "%d", accel_y);
+          u8g2_DrawStr(u8g2_display, 41,21, text);
+
+          u8g2_DrawStr(u8g2_display, 3, 28, "accel_z: ");
+          sprintf(text, "%d", accel_y);
+          u8g2_DrawStr(u8g2_display, 41,28, text);
+*/
+
+
+          u8g2_SendBuffer(u8g2_display);
+
+
 
 
         //  ESP_LOGI(TAG, "All done!");

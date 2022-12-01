@@ -19,6 +19,8 @@
 #include "mqtt_connection.h"
 #include "cJSON.h"
 #include "esp_http_client.h"
+#include "mpu6050.h"
+#include "driver/adc.h"
 
 
 static const char *TAG = "JSON";
@@ -31,6 +33,8 @@ static const char *TAG = "JSON";
 #define LED_RED (5)
 #define LED_GREEN (18)
 #define LED_BLUE (19)
+#define ADC1_0_PIN 36
+
 
 #define RGB_OFF 0b000
 #define RGB_RED 0b001
@@ -43,8 +47,10 @@ static const char *TAG = "JSON";
 
 
 float temperature, humidity;
-
-
+short accel_x,accel_y,accel_z;
+short gyro_x,gyro_y,gyro_z;
+float temp_mpu;
+float illuminance;
 esp_err_t client_event_post_handler(esp_http_client_event_handle_t evt);
 
 void vInitHW(void);
@@ -57,6 +63,12 @@ void vInitHW(void)
     gpio_set_direction(LED_GREEN,GPIO_MODE_OUTPUT);
     gpio_pad_select_gpio(LED_BLUE);
     gpio_set_direction(LED_BLUE,GPIO_MODE_OUTPUT);
+
+    adc1_config_width(ADC_WIDTH_BIT_12);
+    adc1_config_channel_atten(ADC1_CHANNEL_0, ADC_ATTEN_DB_11);
+
+
+
 
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
@@ -162,6 +174,51 @@ esp_err_t client_event_post_handler(esp_http_client_event_handle_t evt)
 }
 
 
+void temt6000_task()
+{
+    
+    while(1)
+    {   
+        int vadc = adc1_get_raw(ADC1_CHANNEL_0);
+
+        // ConversÃ£o de corrente no resistor de 10KOhms para iluminÃ¢ncia:
+        // de acordo com o datasheet; 20 lux @ 10uA -> 2 lux/uA:
+        // IluminÃ¢ncia[lux] = ((Vadc[mV] / 1000) / 10000) * 2000000
+
+        illuminance = (((float)vadc / 1000) / 10000) * 2000000;
+        printf("\r\nIluminÃ¢ncia: %2.2f lux (Vadc=%d mV)\n",illuminance, vadc);
+        vTaskDelay(pdMS_TO_TICKS(2000));
+    }
+}
+void sendmsg_task()
+{
+    
+    while(1)
+    {   
+            cJSON *root;
+            root = cJSON_CreateObject();
+            esp_chip_info_t chip_info;
+            esp_chip_info(&chip_info);       
+            cJSON_AddNumberToObject(root, "accel_x", accel_x);
+            cJSON_AddNumberToObject(root, "accel_y", accel_y);
+            cJSON_AddNumberToObject(root, "accel_z", accel_z);
+
+            cJSON_AddNumberToObject(root, "gyro_x", gyro_x);
+            cJSON_AddNumberToObject(root, "gyro_y", gyro_y);
+            cJSON_AddNumberToObject(root, "gyro_z", gyro_z);
+
+            cJSON_AddNumberToObject(root, "Lumin", illuminance);
+            cJSON_AddNumberToObject(root, "Temperature", temp_mpu);
+
+            char *my_json_string = cJSON_Print(root);
+            ESP_LOGI(TAG, "my_json_string\n%s",my_json_string);
+            cJSON_Delete(root);
+
+        mqtt_publish(my_json_string);        
+        vTaskDelay(pdMS_TO_TICKS(60000));
+    }
+}
+
 
 
 
@@ -174,8 +231,10 @@ void app_main()
 
     //vTaskDelay(pdMS_TO_TICKS(3000));
     
-    xTaskCreate(dht_test, "dht_test", configMINIMAL_STACK_SIZE * 10, NULL, 1, NULL);
-    xTaskCreate(led_task, "led_task", configMINIMAL_STACK_SIZE * 3, NULL, 1, NULL);
+    //xTaskCreate(led_task, "led_task", configMINIMAL_STACK_SIZE * 3, NULL, 1, NULL);
+    xTaskCreate(mpu6050_task, "mpu_task", configMINIMAL_STACK_SIZE * 5, NULL, 2, NULL);
+    xTaskCreate(temt6000_task, "temt6000_task", configMINIMAL_STACK_SIZE * 3, NULL, 2, NULL);
+    xTaskCreate(sendmsg_task, "sendmsg_task", configMINIMAL_STACK_SIZE * 3, NULL, 2, NULL);
 
 }
 

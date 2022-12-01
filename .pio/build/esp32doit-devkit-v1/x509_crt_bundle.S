@@ -1,4 +1,4 @@
-/* * Data converted from c:\Users\Mark\Desktop\Pos_Graduacao_inatel\IT012\Projeto\PRJ_IOT012\.pio\build\esp32doit-devkit-v1\x509_crt_bundle
+/* * Data converted from C:\Users\Mark\Desktop\Pos_Graduacao_inatel\IT012\Projeto\PRJ_IOT012\.pio\build\esp32doit-devkit-v1\x509_crt_bundle
  */
 .data
 .section .rodata.embedded
