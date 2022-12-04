@@ -204,7 +204,7 @@ static void prvTask_StatusBar(u8g2_t* pvParameters)
             {
               
               u8g2_SetDrawColor(pvParameters,0);
-              u8g2_DrawBox(pvParameters,88,0,27,6);         
+              u8g2_DrawBox(pvParameters,82,0,35,8);         
               u8g2_SetDrawColor(pvParameters,1);
               u8g2_SetFont(pvParameters,u8g2_font_m2icon_9_tf);            
               u8g2_DrawGlyph(pvParameters,80,8,68);          
@@ -213,7 +213,7 @@ static void prvTask_StatusBar(u8g2_t* pvParameters)
            {
 
               u8g2_SetDrawColor(pvParameters,0);
-              u8g2_DrawBox(pvParameters,88,0,27,6);     
+              u8g2_DrawBox(pvParameters,82,0,35,8);     
               u8g2_SetDrawColor(pvParameters,1);
               u8g2_SetFont(pvParameters,u8g2_font_m2icon_9_tf);            
               u8g2_DrawGlyph(pvParameters,80,8,67);
@@ -332,18 +332,18 @@ char text[20];
           u8g2_DrawStr(u8g2_display, 3, 14, "acel(x,y,z): ");
           
           int pos=0;
-          pos+=sprintf(&text[pos], "%d  ", accel_x);
-          pos+=sprintf(&text[pos], "%d  ", accel_y);
-          pos+=sprintf(&text[pos], "%d  ", accel_z);
+          pos+=sprintf(&text[pos], "%0.1f  ", accel_x);
+          pos+=sprintf(&text[pos], "%0.1f  ", accel_y);
+          pos+=sprintf(&text[pos], "%0.1f  ", accel_z);
           u8g2_DrawStr(u8g2_display,54,14, text);
           
           
           u8g2_DrawStr(u8g2_display, 3, 21, "gyro(x,y,z): ");
           
           pos=0;
-          pos+=sprintf(&text[pos], "%d ", gyro_x);
-          pos+=sprintf(&text[pos], "%d ", gyro_y);
-          pos+=sprintf(&text[pos], "%d ", gyro_z);
+          pos+=sprintf(&text[pos], "%0.1f ", roll);
+          pos+=sprintf(&text[pos], "%0.1f ", pitch);
+          pos+=sprintf(&text[pos], "%0.1f ", yaw);
 
           u8g2_DrawStr(u8g2_display, 55,21, text);
 

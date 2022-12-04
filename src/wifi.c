@@ -28,8 +28,8 @@
    the config you want - ie #define EXAMPLE_WIFI_SSID "mywifissid"
 */
 
-#define EXAMPLE_ESP_WIFI_SSID      "eir24437355"
-#define EXAMPLE_ESP_WIFI_PASS      "hJKPjesRxC"
+#define EXAMPLE_ESP_WIFI_SSID      "eir45837788"
+#define EXAMPLE_ESP_WIFI_PASS      "N5KdENSEHd"
 
 
 #define EXAMPLE_ESP_MAXIMUM_RETRY  50

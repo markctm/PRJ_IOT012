@@ -47,8 +47,9 @@ static const char *TAG = "JSON";
 
 
 float temperature, humidity;
-short accel_x,accel_y,accel_z;
-short gyro_x,gyro_y,gyro_z;
+float accel_x,accel_y,accel_z;
+float gyro_x,gyro_y,gyro_z;
+float roll, pitch, yaw;
 float temp_mpu;
 float illuminance;
 esp_err_t client_event_post_handler(esp_http_client_event_handle_t evt);
@@ -127,7 +128,7 @@ void dht_test(void *pvParameters)
            
 
             
-            mqtt_publish(my_json_string);     
+            mqtt_publish(my_json_string,strlen(my_json_string));     
         }
         else
         {
@@ -199,28 +200,26 @@ void sendmsg_task()
             root = cJSON_CreateObject();
             esp_chip_info_t chip_info;
             esp_chip_info(&chip_info);       
-            cJSON_AddNumberToObject(root, "accel_x", accel_x);
-            cJSON_AddNumberToObject(root, "accel_y", accel_y);
-            cJSON_AddNumberToObject(root, "accel_z", accel_z);
+            cJSON_AddNumberToObject(root, "accer_x", accel_x);
+            cJSON_AddNumberToObject(root, "accer_y", accel_y);
+            cJSON_AddNumberToObject(root, "accer_z", accel_z);
 
-            cJSON_AddNumberToObject(root, "gyro_x", gyro_x);
-            cJSON_AddNumberToObject(root, "gyro_y", gyro_y);
-            cJSON_AddNumberToObject(root, "gyro_z", gyro_z);
+            cJSON_AddNumberToObject(root, "roll", roll);
+            cJSON_AddNumberToObject(root, "pitch",pitch);
+            cJSON_AddNumberToObject(root,  "yaw", yaw);
 
-            cJSON_AddNumberToObject(root, "Lumin", illuminance);
-            cJSON_AddNumberToObject(root, "Temperature", temp_mpu);
+            cJSON_AddNumberToObject(root, "luminancia", illuminance);
+            cJSON_AddNumberToObject(root, "temperature", 25);
 
             char *my_json_string = cJSON_Print(root);
             ESP_LOGI(TAG, "my_json_string\n%s",my_json_string);
+            
             cJSON_Delete(root);
 
-        mqtt_publish(my_json_string);        
-        vTaskDelay(pdMS_TO_TICKS(60000));
+            mqtt_publish(my_json_string,strlen(my_json_string));        
+            vTaskDelay(pdMS_TO_TICKS(3000));
     }
 }
-
-
-
 
 
 void app_main()
@@ -232,9 +231,9 @@ void app_main()
     //vTaskDelay(pdMS_TO_TICKS(3000));
     
     //xTaskCreate(led_task, "led_task", configMINIMAL_STACK_SIZE * 3, NULL, 1, NULL);
-    xTaskCreate(mpu6050_task, "mpu_task", configMINIMAL_STACK_SIZE * 5, NULL, 2, NULL);
+    xTaskCreate(mpu6050_task, "mpu_task", configMINIMAL_STACK_SIZE * 5, NULL, 3, NULL);
     xTaskCreate(temt6000_task, "temt6000_task", configMINIMAL_STACK_SIZE * 3, NULL, 2, NULL);
-    xTaskCreate(sendmsg_task, "sendmsg_task", configMINIMAL_STACK_SIZE * 3, NULL, 2, NULL);
+    xTaskCreate(sendmsg_task, "sendmsg_task", configMINIMAL_STACK_SIZE * 6, NULL, 2, NULL);
 
 }
 
