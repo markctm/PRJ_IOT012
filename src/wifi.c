@@ -20,7 +20,7 @@
 #include "lwip/sys.h"
 #include "vDisplay.h"
 #include "mqtt_connection.h"
-
+#include "globals.h"
 
 
 /* The examples use WiFi configuration that you can set via project configuration menu
@@ -103,13 +103,15 @@ static void event_handler(void* arg, esp_event_base_t event_base,
         ESP_LOGI(TAG, "got ip:" IPSTR, IP2STR(&event->ip_info.ip));
         s_retry_num = 0;
 
-        // Connected Succeful 
-        mqtt_init();
+        // Connected Succeful  
+        mqtt_init(); // Inicializa MQTT após sucesso na conexão WIFI
         xTaskCreate(TaskWifi_monitor, "wifi_monitor", configMINIMAL_STACK_SIZE * 3, NULL, 1, &TaskWifi_monitor_hdlr);
         xEventGroupSetBits(s_wifi_event_group, WIFI_CONNECTED_BIT);
 
-        
-
+     
+        esp_efuse_mac_get_default(mac_base);
+        esp_read_mac(mac_base, ESP_MAC_WIFI_STA);
+        printf("\n\n%02X:%02X:%02X:%02X:%02X:%02X", mac_base[0],mac_base[1],mac_base[2],mac_base[3],mac_base[4],mac_base[5]);
     }
 }
 
@@ -124,9 +126,6 @@ void TaskWifi_monitor(void )
     for(;;)
     {
             esp_wifi_sta_get_ap_info(&ap);
-            printf("%d\n", ap.rssi);
-            printf("%d\n", rssi_old_value);  
-
 
 
             if((ap.rssi - rssi_old_value > 10) || (ap.rssi - rssi_old_value < -10))
@@ -145,7 +144,7 @@ void TaskWifi_monitor(void )
                 }
                 if(ap.rssi<=-80){
                     SIGNAL_STRENGHT_1();
-                    printf("aquiiiiiiiiiiiiii");
+                  
                 }
             }
             rssi_old_value=ap.rssi;

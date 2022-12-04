@@ -332,18 +332,23 @@ char text[20];
           u8g2_DrawStr(u8g2_display, 3, 14, "acel(x,y,z): ");
           
           int pos=0;
-          pos+=sprintf(&text[pos], "%0.1f  ", accel_x);
-          pos+=sprintf(&text[pos], "%0.1f  ", accel_y);
-          pos+=sprintf(&text[pos], "%0.1f  ", accel_z);
+
+          /*u8g2_SetDrawColor(u8g2_display,0);
+          u8g2_DrawBox(u8g2_display,0,14,74,7);
+          u8g2_SetDrawColor(u8g2_display,1);*/
+
+          pos+=sprintf(&text[pos], "%0.0f   ", accel_x);
+          pos+=sprintf(&text[pos], "%0.0f   ", accel_y);
+          pos+=sprintf(&text[pos], "%0.0f   ", accel_z);
           u8g2_DrawStr(u8g2_display,54,14, text);
           
           
           u8g2_DrawStr(u8g2_display, 3, 21, "gyro(x,y,z): ");
           
           pos=0;
-          pos+=sprintf(&text[pos], "%0.1f ", roll);
-          pos+=sprintf(&text[pos], "%0.1f ", pitch);
-          pos+=sprintf(&text[pos], "%0.1f ", yaw);
+          pos+=sprintf(&text[pos], "%0.1f ", gyro_x);
+          pos+=sprintf(&text[pos], "%0.1f ", gyro_y);
+          pos+=sprintf(&text[pos], "%0.1f ", gyro_z);
 
           u8g2_DrawStr(u8g2_display, 55,21, text);
 
@@ -355,7 +360,7 @@ char text[20];
 
           u8g2_DrawStr(u8g2_display, 70, 28, "Temp: ");
           pos=0;
-          pos+=sprintf(&text[pos], "%0.1f ", temp_mpu);
+          pos+=sprintf(&text[pos], "%0.1f ", temperature);
           u8g2_DrawStr(u8g2_display, 95,28, text);
 
 

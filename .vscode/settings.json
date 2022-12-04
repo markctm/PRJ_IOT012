@@ -5,6 +5,17 @@
         "task.h": "c",
         "stdio.h": "c",
         "freertos.h": "c",
-        "mqtt_connection.h": "c"
+        "mqtt_connection.h": "c",
+        "cjson.h": "c",
+        "optional": "c",
+        "istream": "c",
+        "ostream": "c",
+        "ratio": "c",
+        "system_error": "c",
+        "array": "c",
+        "functional": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c"
     }
 }

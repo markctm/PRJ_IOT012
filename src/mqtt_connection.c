@@ -30,6 +30,7 @@
 #include "mqtt_client.h"
 #include "mqtt_connection.h"
 #include "vDisplay.h"
+#include "parameters.h"
 
 #define CONFIG_CLIENT_ID     "gatoee"
 #define MQTT_SERVER                                 "mqtt://m16.cloudmqtt.com:10304"
@@ -76,10 +77,10 @@ static void log_error_if_nonzero(const char *message, int error_code)
  * @param event_data The data for the event, esp_mqtt_event_handle_t.
  */
 
-void mqtt_publish(const char* msg, uint16_t len)
+void mqtt_publish(const char* msg, const char* topic, uint16_t len)
 {
 
-  esp_mqtt_client_publish(client, "tb/mqtt-integration-tutorial/sensors/Smart sensor/temperature", msg, 0, 1, 0);
+  esp_mqtt_client_publish(client, topic , msg, 0, 1, 0);
 
 
 
@@ -119,9 +120,10 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
         break;
     case MQTT_EVENT_DATA:
         ESP_LOGI(TAG, "MQTT_EVENT_DATA");
-         printf("teste conectado");
-        printf("TOPIC=%.*s\r\n", event->topic_len, event->topic);
-        printf("DATA=%.*s\r\n", event->data_len, event->data);
+        //printf("TOPIC=%.*s\r\n", event->topic_len, event->topic);
+        //printf("DATA=%.*s\r\n", event->data_len, event->data);
+        receivemsg_task(event->data_len, event->data);
+        
         break;
     case MQTT_EVENT_ERROR:
         ESP_LOGI(TAG, "MQTT_EVENT_ERROR");
